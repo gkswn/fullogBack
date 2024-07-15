@@ -1,23 +1,23 @@
 package com.example.fullogback.domain.member.entity;
 
+import com.example.fullogback.custom.entity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Getter
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class MemberEntity {
-    @EmbeddedId
-    private MemberId id;
+public class MemberEntity extends BaseEntity {
 
     @Column
-    private String name;
+    private String inetId;
+
+    @Column
+    private String nickName;
 
     @Column
     private String pwd;
@@ -34,5 +34,7 @@ public class MemberEntity {
     @Column
     private MemberStatus memberStatus;
 
+    @Column
+    private MemberType memberType;
 
 }
