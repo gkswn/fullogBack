@@ -1,17 +1,16 @@
-package com.example.fullogback.domain.member.entity;
+package com.example.fullogback.custom.entity;
 
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import lombok.Getter;
 
-import java.util.UUID;
-
+@Getter
 @Embeddable
-public class MemberId {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String memberId;
+public class BaseId {
 
-    private UUID uuid;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+
 }
