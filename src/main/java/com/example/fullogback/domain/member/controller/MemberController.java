@@ -32,7 +32,6 @@ public class MemberController {
     public String login(MemberLoginDto memberLoginDto, HttpSession session) {
 
         memberService.login(memberLoginDto);
-        session.setAttribute("");
         return "/";
     }
 }
