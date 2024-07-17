@@ -13,5 +13,10 @@ public class MemberException extends RuntimeException {
         this.redirectUrl = redirectUrl;
     }
 
+    public MemberException(String message) {
+        super(message);
+        this.msg = message;
+    }
+
 
 }

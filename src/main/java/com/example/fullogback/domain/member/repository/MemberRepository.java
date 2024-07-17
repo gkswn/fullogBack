@@ -6,5 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface MemberRepository extends JpaRepository<MemberEntity, Long> {
-    Optional<MemberEntity> findByInetId(String inetId);
+    MemberEntity findByInetId(String inetId);
+
+    Optional<MemberEntity> findByInetIdAndPwd(String inetId, String pwd);
 }
