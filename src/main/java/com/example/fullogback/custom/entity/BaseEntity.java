@@ -15,8 +15,6 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity {
-    @EmbeddedId
-    private BaseId id;
 
     @CreatedDate
     private LocalDateTime createdAt;

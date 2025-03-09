@@ -15,6 +15,9 @@ import java.util.List;
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class PostEntity extends BaseEntity {
 
+    @Id
+    private String id;
+
     @Column
     private String title;
     @Column

@@ -13,6 +13,9 @@ import org.springframework.web.multipart.MultipartFile;
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class ImageEntity extends BaseEntity {
 
+    @Id
+    private String id;
+
     @Column
     private String url;
 
