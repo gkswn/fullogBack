@@ -6,9 +6,11 @@ import com.example.fullogback.domain.member.entity.MemberEntity;
 import com.example.fullogback.domain.member.exception.MemberException;
 import com.example.fullogback.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class MemberService {
@@ -20,8 +22,8 @@ public class MemberService {
     }
 
     public void validateInetId(MemberCreateDto memberCreateDto) {
-         String alreadyExistInetId = memberRepo.findByInetId(memberCreateDto.inetId()).getInetId();
-         if(!alreadyExistInetId.isEmpty()) {
+         boolean alreadyExistInetId = memberRepo.existsByInetId(memberCreateDto.inetId());
+         if(alreadyExistInetId) {
              throw new MemberException("이미 존재하는 아이디입니다.");
          }
     }
@@ -33,9 +35,7 @@ public class MemberService {
     }
 
     public MemberEntity login(MemberLoginDto memberLoginDto) {
-        MemberEntity memberEntity = memberRepo.findByInetIdAndPwd(memberLoginDto.inetId(), memberLoginDto.pwd())
+        return memberRepo.findByInetIdAndPwd(memberLoginDto.inetId(), memberLoginDto.pwd())
                 .orElseThrow(() -> new MemberException("찾을 수 없는 회원입니다. 아이디 혹은 비밀번호를 확인하세요.", "/"));
-
-        return memberEntity;
     }
 }

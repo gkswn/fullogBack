@@ -8,5 +8,7 @@ import java.util.Optional;
 public interface MemberRepository extends JpaRepository<MemberEntity, Long> {
     MemberEntity findByInetId(String inetId);
 
+    boolean existsByInetId(String inetId);
+
     Optional<MemberEntity> findByInetIdAndPwd(String inetId, String pwd);
 }
