@@ -2,6 +2,8 @@ package com.example.fullogback.domain.post.entity;
 
 import com.example.fullogback.custom.entity.BaseEntity;
 import com.example.fullogback.domain.image.Entity.ImageEntity;
+import com.example.fullogback.domain.post.dto.PostContent;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,10 +22,18 @@ public class PostEntity extends BaseEntity {
 
     @Column
     private String title;
+
     @Column
     private String content;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<ImageEntity> images = new ArrayList<>();
+    @Column
+    private String authorName;
 
+    public PostContent fromEntity() {
+        return PostContent.builder()
+            .content(content)
+            .authorNickname(authorName)
+            .title(title)
+            .build();
+    }
 }
