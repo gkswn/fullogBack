@@ -1,21 +1,22 @@
 package com.example.fullogback.domain.member.exception;
 
-import org.springframework.ui.Model;
+import jakarta.servlet.http.HttpServletRequest;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.servlet.ModelAndView;
 
 @ControllerAdvice
 public class MemberExceptionHandler {
-    // ModelAndView 객체 생성
+    private static final Logger logger = LogManager.getLogger(MemberExceptionHandler.class);
 
     // CustomException 처리 핸들러
     @ExceptionHandler(MemberException.class)
-    public ModelAndView handleCustomException(MemberException ex, Model model) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("message", ex.getMessage());
-        modelAndView.setViewName("redirect:" + ex.getRedirectUrl());
+    public String handleCustomException(MemberException ex, HttpServletRequest request) {
 
-        return modelAndView;
+        logger.error("Request URL : " + request.getRequestURL());
+        logger.error("Exception : " + ex.getMessage());
+
+        return ex.getRedirectUrl();
     }
 }
